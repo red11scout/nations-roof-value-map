@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nations Roof - Value Map</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #F5F5F5;
+      color: #333333;
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #FFFFFF;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #001177 0%, #04A1FE 100%);
+      color: #FFFFFF;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .blueally-logo {
+      height: 40px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .value-map-title {
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .mission-statement {
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    .company-logo {
+      height: 50px;
+      max-width: 80px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+
+    .value-map-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .value-map-table th,
+    .value-map-table td {
+      border: 1px solid #C8C8C8;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .header-row th {
+      background: linear-gradient(135deg, #001177 0%, #04A1FE 100%);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .label-header {
+      width: 15%;
+    }
+
+    .data-header {
+      text-align: center;
+      width: 17%;
+    }
+
+    .label-cell {
+      background-color: #FFFFFF;
+      font-weight: 600;
+      font-size: 12px;
+      color: #333333;
+    }
+
+    .label-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .indicator {
+      width: 4px;
+      height: 24px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .indicator-blue {
+      background-color: #04A1FE;
+    }
+
+    .indicator-green {
+      background-color: #32BF78;
+    }
+
+    .data-cell {
+      font-size: 12px;
+      color: #333333;
+    }
+
+    .data-cell p {
+      margin: 0;
+    }
+
+    .row-white td.data-cell {
+      background-color: #FFFFFF;
+    }
+
+    .row-pale td.data-cell {
+      background-color: #C8E5F2;
+    }
+
+    .row-pale td.label-cell {
+      background-color: #C8E5F2;
+    }
+
+    .cell-list {
+      margin: 0;
+      padding-left: 16px;
+      list-style-type: disc;
+    }
+
+    .cell-list li {
+      margin-bottom: 4px;
+    }
+
+    .cell-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: #C8C8C8;
+      background-color: #F5F5F5;
+    }
+
+    @media print {
+      body {
+        background-color: #FFFFFF;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .footer {
+        background-color: #FFFFFF;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .mission-statement {
+        order: 4;
+        flex-basis: 100%;
+      }
+
+      .value-map-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .value-map-table th,
+      .value-map-table td {
+        min-width: 150px;
+      }
+
+      .label-header,
+      .label-cell {
+        min-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABGCAYAAAA6qvMsAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAA4aADAAQAAAABAAAARgAAAADamIVBAAANoklEQVR4Ae2dT4gkdxXHd5PNP43QMTlIEpk6iCGnbTEHBXUr4iEIur3gQVCYSnIRPGwHchAUplYEJXhob0GFrREFBWF7VVDwML2Yg3pwJwdBQd0elSSokI5RI8km6+etVb01v3mv/nRXVffs/B681O/3fX9/r36vqrq6Z3PsmCdfAV8BXwFfAV+Bo1yB40d58X7tvgJlFbh27dod6HwJvhu+K8d35saCa/OfHT9+fIDMk6+Ar8AyFaARn4UXobcwet8ysb2tr4CvABWgke6DX1qkC7EZ+yL6CvgKNFABmulj8JsLNKLcDd/TQAreha+ArwDN9IUFmlBMEl89XwFfgYYqQEM9AV+VzqpBb6Dr74YNnQPv5ghVgMY5CX/ZXTLYR+F/wHUocf34ua+Ar0BBBeiuW+BdWO56fVcVbAP+CVyVxI+/G7qF9HNfAasCNEz+899l5rdruuCPwNvwq3AZJZoP/2W9VhWPHekK0EknKcCv4XzjPcUX7yOrMNjIl/Wn4I/A74dl7tJVgE/hZ+YK/NxXwFcgrQDNdDssj6EuvQAgv4zx5CvgK9BmBWi0r7ndl5sP24ztffsKHPkK0GzyNrToC/lJG0XynwnbqKr3eegqQPPJ579d+OGS5O/nM92LJTr7xPi+DeAx+ENwAD8Avxu+H/4s7MlXwFeARil6DEU8p0HVamFxAv4i/PLcev/gRaa33VLVodfzFbjJK3BrxfXJm89Sork+iNJv4a/APcPgHHfVNwyZh30FjlYFaJq74b/AZfRsUWUwvhV+BpYfbhfRHxCeKPLlZb4CR64CNMWgqGtS2fetwiB/G/zzCj5E5dOWH4/7ChzpCtAcPy5poh9oBcLmLvhXJbaZ+LLmw2O+Ar4CVIAueRAu+gma+jiKTVnzZg0oR3lT6slXwFfAqgBN8nS+Y5yx/Hsz+wj5k45O0fQX+4z9xFfAV+BgBeigO+DfGZ207y6Gzjvgvxu6GvzIwYge8RXwFThQAbonVDpIfk1zX16Z+dcVPQsa52392FfAV6CkAnRS4nTTJG+C7AH4dUfHmkoDP5S392NfAV+BkgrQNPfC+b+gj/ImyL4DV6Ukb5sfr91vR1mR/GOrd+aTTMev8uuCtxTcQ2tUAc6ffAH9diWl/2i/DkFffqki/7CuS6+h/7oLdj0nvyeJ+W34b/AGOf03ywHZxxm/E74nPebH8iuZe1Nc1vcwtn/meJBw1AbJXyJfgM/CwcGoNoL+V2GN3mtbeUmVClBU7XNOVuu4io8yHZx9InPoHCPNFh3591o0+rymvwqM5Hbgz7UVu63fjvZJeACP4CssQBpSrgyeVluBrYLwcsH050gv0BPA39JFy6NtNaGbmTSkNGPfFfh5NxWg9iGRhC2SBhxawqOM8xh5BX6zrRp01YSSv5xkf0ds60yW+43KVY5tVtDxKg1XoMsmlNQDeCQDT91VgLtgQLQqDRagG3WXmY8kFTCbkNtvLcLXoymf4bgNW3SaEy13RU/dVSCuEaroc2MNN161agXMJqzqINOjYycpjzlG4PK/hHolk+eO0oCD3NwPW6xAjbtgloXcDf35yarRwbGxJnRzpRF3wYYuns4DA7/p4bQpulyndQ4kB+uJ5WyXCR71WG3/Za80okY9DVwEY1OH2J1SbLe5EEwV3IQK7hqX8DUxDRUBvmSNklcID+AAvk7IsuGUgfAYvlg3X2wKKc1h01C6BB7Dmly+TwzrrtmIszRMLoGRp/iWuu3KYBHC95Zht930+TDiXP/7KfI4SKZBTcFBz9eRkeUGaa0v69GPjRihFcPC8SObT6PYsnFxjHvwFvwyXJfOYxC4Phed48uqjeQVil+OiUwU2lkkLn5a+bIev1MlR4GSRfIUG2wjw+cMvLeo37p2rT2OposMjYRmBn6oYU5cnwXIX03H8CInMcLuCn6sqzPiapRuIuux8vncXS4xPIb4CAzZKuCREXRziTy1pwAJM6I+ne3RVpuQxUSyIoUmCnaoITZCxAKkAQN4WYrxd35JJwPsrQvBfEOnzSiPphrFGrgiLCGu9qJP0onkP3WI+vbRDw2beX0MeaNwa03IIuVqrl1p9nJX4UYXsypnrHVA7KKmkc0jG/1cji8ytjYVomPyqFTkU3SKSOqvkdQ/cQTuPBNvkkOQTVZ5JOcZ8a3msO74RSkPDeF2GssQNw+bL2YovnUSy7LooxDCPUMxMvBDCaeb1GqWPRYVK5t+vlbsB0xG8MYcvDGQRpQXD+MbUPkImwitwNCUWPtI8sMmBtRyEDyC14Ekd21fyufwqKjO+eTR7TE/ncdy4zg37mZIQl1SVLYqkjlUL2bId2wUcBdcTnYpiR4sjaDRlVIHjgJOrmiOwGawmhP40LCRF0yqjRP2+hTdVl7MZLHwb9VpJ9MpO+JDLm4ajcts25C39jiqJPtU1SuVYruWEGcxJDHtivo8uLzin1VJXPTgCF2xcykgztAFrTm6A2SBIS964ZBgoz0e98ArxzfiNgnHhrOQtfcNmQtrd1PRGbmKXcy7bMItimQtvou1thEjMpwOqzagYz9w5tl0MxtUOBZ9Pkos+zTfsSE/y7nrGbJOYfKcEnDbCDo08DnMOkImwRy4MbiE78mNaXejLptQTmJMEc53t7zWI4VKhIVPZsEG61dpgnSDaTlJmtupfyXlORTPR/sHcu4G+6GVzkZG9M0KdYoM28TAW4fNFzNEvrRE9FMFtvI8vseGiAt01l7EGvokuaEkuoFsR8GrQoGhKPEmhiyDt7KBcjxZMa8Ztj3FXnwnCt45xN7ZZS2yP08pwYdgsYIfw0bWtanIZD8mCt4JZDYhSYXLZMCCB9iP4A3FzxbyhBhTRXZYIDmhGgWAwk1TH4cTyyn1DJCFlhxc7JehgBiV30AuE6iibYzejqIrTSYyjYYaCBYbeCdwa4+jNNiYFciJ3zNWEhn4YYF7HSdaFi/uIJ+tDmJUCsH+mqBovcgaGE6kQV16BV+JC3Y5b60JZREsbsZhaCwoNPDDApc1RWfrSO+C2gZrOge5G4ZNO13C38iwPfByirwH6AaKvuVDUW0HarUJ05QnRuonDfywwNM1SjTuMJd1uhsmrFt70grTC1O+LAcaE6F8JXPzN2F6N8wXIxv3ssFNdjzDmtug2KoTweSzWqNErMeNeLLBQ0O2Cjg2gs7xtCFDRW9M0WYK3inUxZ2w0wUtGaxf1Z6TNzF0BwZ+2OAxCWtf3ss6IvnPOhDnISEPLc/TNF8vzXFo5BobeKdw601IIaxNqX2o7nTxSjDrZCmq16GLimAzd/IVsQ2JHXwB3lE4sC3/L8HmHlj+N10X4Z/Cd5XZWPL0DjEy5Jv4DgzZKmAtzx6JRGky2uflbdY4TeUrPbTehKxOexaXRe82tPKZ4Wdg4CrMpkoQbKhCGxwbogsGXgYPUZC8Q4fZL/aGkYaAv4fNS7D8k+2fhP+EzWscl6FRgXFcIOtaJHlqd0P5pU+ErKcklCjYaiCSVGnZbHAqG0Ou6hbJZjtAKNf9Abd8RtHoZcD+gQAOgI7cfc7DRRQ7ZvMpRlPD8Dy4dvLntvkBupHhR+Awr5sfIzsN/1uUcvQW44fyeouO8ZPk/LrDwPWLQqs/4HbjZXPijtzk0rnsA5cmmd06HE9YSZD1om/BAnzK5i9qgD2u0mMrdh0cPxNy1UykAXaQye84t10FcJHLY8oQDuBFSey1O18EHhIn1uJnwZAHjCWPGNboG7JGTYDt0+DPwMcd+Y+w+b2DLTqNMZT8NIoAY02wAmxETO2pS86zS6K7PsSJXAX1rQqQTK07ofjBpuhqna1vh0HGlzOw4jG28q0YX67GF+Ath3eYF5H8PEvbRLLm0wWGHyjKt66MOGMjlqxrX37MV3InrHgeZBnTuutvXV+y6piiokWRyyJNGGA3a3EdcVHOIiN2lQtBnRSLGlDWKw2g0S/Lcq0rJ0ioBUqxOO8PbJVNKHUpoyif7zqMu3gxk61TPjjLd2hJBjR1xOcUXyGsfTgHrkTPo3WmkqaiRA4R8DlFtAh0EaMQnzPDOAbfdwfK6Y1y40aG5DHBkdRHI+0RUNNrHUv3gdTOopX/RE1LrIsm3COwbM6AIo21JJrA8L0rMeBLNf29gv457PscZzVt96njIwZ4FK6bQ+Znj8Hj+BnAai5c5h9E5zOZgXOUz4E/dLCmpiPDUY+cIkO2CtjKU3Ipkq0i1+sx5cXMohsmn7RsmN08kM532UxTBy+b/gaF7ypK/1SwfVC6ceXRqY9gCIfwBqyRXNnH8Ci34WfMtXpMwSsRviYoSg4Bx0jG8CnYImm8CTzGVvIpow+j8Jyh9E18XDVkS8H4TVjTACc9xVEIlqT4Xzlq5++Pqdw9yNcqmv5CL5ak/uQ5xWcA50kutqM8sC7j4+uSSFt5cEJk0/Tz/uVE5eddjNcljy7WusoY1Dkg/hUlh23Oe6TgHvIV8BVosgI04WVYo6DJON6Xr8CRrgAdFsGnhKUQHPuwfGWzA2uUHOmC+cX7CjRdAbpMPvdVJfnqKmg6hyb9dfF2tMl8vS9fgboVkF8sTesaeX1fAV+BggpwZ6t6J0wK3KyNyN8J1+ZU+EQarED23W/UoM/WXN30X1G0VjnveGUV4E74GMHla6d3OUn8i/ku/ByPoPL946Gg/wG43MM9CqEA7AAAAABJRU5ErkJggg==" alt="BlueAlly" class="blueally-logo" />
+      <span class="value-map-title">Value Map</span>
+      <p class="mission-statement">Transforming commercial roofing through autonomous AI systems that deliver end-to-end excellence from intelligent lead generation to seamless project delivery, creating unmatched value for customers and stakeholders.</p>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACAIAAAETCAMAAACRVsbZAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABjUExURQAAAMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLMwTLP///////////////////////////////////////////////////////////8wTLP///60m4E8AAAAfdFJOUwAwj+/fUJ8QYK8gcM+AQL8QQFCAv98wcM/vr2Agn48SjMYxAAAAAWJLR0QQlbINLAAAAAd0SU1FB+kJCwwkNhDGiMEAAAABb3JOVAHPoneaAAA44ElEQVR42u2d14LbNhBF1y3uCSlKqy77/78yq04RA3IwBSC197wksSMQBFEuMAUvLwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDiw8fSNQAAAABAAT5+Kl0DAAAAABTg858vpasAAAAAgOx8+fPnn9J1AAAAAEB2/vnz59PX0pUAAAAAQGa+fvrz58+30rUAAAAAQGa+vSmAP99L1wIAAAAAmfl+lAB/fpSuBgAAAACy8vWkAP78LF0PAAAAAGTl51kC/CpdDwAAAABk5ddZAsASAAAAALwrflwUwB8kCQYAAADeE7+vEuBz6ZoAAAAAICOfrxLgz4fSVQEAAABANj7cFACSBAMAAADviI93CYDrAgEAAID3w6e7BMB1gQAAAMC74UtLAcASAAAAALwb/mlLgD+4LhAAAAB4H3z99CABcF0gAAAA8D749qAAcF0gAAAA8E74/igBkCQYAAAAeBf86CgAXBcIAAAAvAt+diUArgsEAAAA3gO/uhIASYIBAACAd0BgB8B1gQAAAMB74GMoAXBdIAAAAPD8fA4lwJ9/S1cKAAAAAM58IBQAkgQDAAAAT88/lATAdYEAAADAs/OJkgC4LhAAAAB4cr6QCgBJggEAAIAn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" alt="Nations Roof logo" class="company-logo" />
+    </div>
+
+    <table class="value-map-table">
+      <thead>
+        <tr class="header-row">
+          <th class="label-header">Section</th>
+          <th class="data-header" data-testid="header-column-0">Autonomous Market Expansion</th>
+<th class="data-header" data-testid="header-column-1">Intelligent Sales Optimization</th>
+<th class="data-header" data-testid="header-column-2">Accelerated Estimation Excellence</th>
+<th class="data-header" data-testid="header-column-3">Seamless Project Delivery</th>
+<th class="data-header" data-testid="header-column-4">Unified Knowledge Foundation</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      <tr class="row-white">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-blue"></div>
+            <span>Business Outcome</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-businessOutcome-0"><p>Grow top-line revenue by $76M over the next 24 months by generating 10,000+ qualified leads annually through autonomous AI agent swarms, improving win rates from 22% to 33%, and closing 1,500 additional projects.</p></td>
+<td class="data-cell" data-testid="cell-businessOutcome-1"><p>Grow revenue by $23.3M annually by increasing win rates from 22% to 33% through AI-powered bid assignment, competitor analysis, and market intelligence, converting 1,287 additional winning bids over 18 months.</p></td>
+<td class="data-cell" data-testid="cell-businessOutcome-2"><p>Increase gross margin by 3% and reduce estimation costs by $3.7M annually by automating proposal creation, reducing proposal time from 2.5 hours to 20 minutes, and decreasing estimate error rates from 8% to 2% within 12 months.</p></td>
+<td class="data-cell" data-testid="cell-businessOutcome-3"><p>Reduce project delivery costs by $17.7M and improve cash flow by $1.2M annually by reducing project delays from 12 days to 3 days, enabling real-time actuals tracking, and automating customer reporting for 1-2 month project cycles over the next 18 months.</p></td>
+<td class="data-cell" data-testid="cell-businessOutcome-4"><p>Reduce operational costs by $4M and increase revenue by $3.9M annually by automating submittal assembly, ensuring data governance with role-based access control, and providing real-time knowledge access across all platforms within 12 months.</p></td>
+      </tr>
+    
+
+      <tr class="row-pale">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-blue"></div>
+            <span>Strategic Initiative</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-strategicInitiative-0"><p>Platform 0: AI Market Expansion Engine - Deploy autonomous agent swarm (The Scout, The Hunter, The Concierge, The Closer) operating 24/7 to identify high-value targets, execute multi-channel outreach, and book qualified meetings directly on estimator calendars</p></td>
+<td class="data-cell" data-testid="cell-strategicInitiative-1"><p>Platform 1: AI Sales Intelligence - Implement opportunity scoring, team matching, competitor proposal analysis, and market monitoring to optimize bid selection and competitive positioning</p></td>
+<td class="data-cell" data-testid="cell-strategicInitiative-2"><p>Chief Estimator</p></td>
+<td class="data-cell" data-testid="cell-strategicInitiative-3"><p>Platform 3: AI Project Management - Generate optimized schedules, automate daily/weekly customer reports, track actuals vs estimates in real-time through Viewpoint ERP integration, and assemble Pre-Con Packets and Project Portfolios</p></td>
+<td class="data-cell" data-testid="cell-strategicInitiative-4"><p>Platform 4: AI Knowledge Management (Foundation Layer) - Build unified knowledge infrastructure with RBAC and data classification, automate submittal package assembly, and create spec-to-Edge mapping for all platforms</p></td>
+      </tr>
+    
+
+      <tr class="row-white">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-blue"></div>
+            <span>Stakeholder</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-stakeholder-0"><p>Chief Revenue Officer</p></td>
+<td class="data-cell" data-testid="cell-stakeholder-1"><p>VP of Sales</p></td>
+<td class="data-cell" data-testid="cell-stakeholder-2"><p></p></td>
+<td class="data-cell" data-testid="cell-stakeholder-3"><p>VP of Operations</p></td>
+<td class="data-cell" data-testid="cell-stakeholder-4"><p>CIO</p></td>
+      </tr>
+    
+
+      <tr class="row-pale">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-green"></div>
+            <span>KPIs</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-kpis-0"><ul class="cell-list"><li>Lead volume: 10,000+ leads annually (from 2,400 baseline)</li><li>Cost per lead: $120 (reduced from $350)</li><li>Speed to lead: &lt;2 minutes (from 4 hours)</li><li>Lead-to-meeting conversion: 12% (from 5%)</li><li>Sales cycle reduction: 14 days faster</li><li>New projects closed: 240 annually from Platform 0 alone</li><li>Maintenance plan attach rate: 25% (from 10%)</li></ul></td>
+<td class="data-cell" data-testid="cell-kpis-1"><ul class="cell-list"><li>Win rate improvement: 33% (from 22% baseline)</li><li>Bid evaluation time: 0.5 hours (from 3.0 hours, 83% reduction)</li><li>Competitive insights per bid: 8 (from 2, 300% increase)</li><li>Market intelligence updates: Daily (from weekly)</li><li>Additional wins annually: 1,287 projects</li><li>Revenue from improved win rate: $23.3M</li><li>Labor savings from automation: $852K</li></ul></td>
+<td class="data-cell" data-testid="cell-kpis-2"><ul class="cell-list"><li>Proposal creation time: 0.33 hours (from 2.5 hours, 87% reduction)</li><li>Specification review time: 0.5 hours (from 3.0 hours, 83% reduction)</li><li>Estimate error rate: 2% (from 8%, 75% reduction)</li><li>Spec-quote match rate: 98% (from 85%)</li><li>Technical Q&amp;A response time: 0.25 hours (from 4.0 hours, 94% reduction)</li><li>Annual labor savings: $3.7M</li><li>Risk reduction from accuracy: $3.9M</li><li>Additional proposal capacity: 262 proposals annually</li></ul></td>
+<td class="data-cell" data-testid="cell-kpis-3"><ul class="cell-list"><li>Schedule creation time: 2.5 hours (from 10 hours, 75% reduction)</li><li>Project delay reduction: 3 days (from 12 days, 75% improvement)</li><li>Variance detection: 1 day (from 30 days, 97% improvement)</li><li>Closeout assembly time: 0.5 hours (from 2 hours, 75% reduction)</li><li>Report generation: 5 minutes (from 45 minutes, 89% reduction)</li><li>Cost reduction from delay elimination: $9.5M</li><li>Working capital improvement: $1.2M</li><li>Customer satisfaction improvement from automated reporting</li></ul></td>
+<td class="data-cell" data-testid="cell-kpis-4"><ul class="cell-list"><li>Submittal assembly time: 2.0 hours (from 13.5 hours, 85% reduction)</li><li>Submittal completeness rate: 99% (from 88%)</li><li>Spec-to-Edge mapping accuracy: 95% (from 75%, 27% improvement)</li><li>RBAC enforcement: 100% across all platforms</li><li>Data classification coverage: 100% of sensitive information</li><li>Knowledge retrieval time: &lt;5 seconds</li><li>Labor savings from automation: $4.0M</li></ul></td>
+      </tr>
+    
+
+      <tr class="row-white">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-green"></div>
+            <span>Use Cases</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-useCases-0"><ul class="cell-list"><li>Autonomous monitoring of hail maps and storm data to trigger emergency service campaigns</li><li>Real-time permit monitoring to identify new roof bid opportunities</li><li>Property age analysis (&gt;15 years) to target re-roof opportunities</li><li>24/7 website and SMS qualification with instant &lt;2 minute response</li><li>Multi-channel outreach campaigns via email, SMS, and LinkedIn</li><li>Automated meeting scheduling directly to estimator calendars</li><li>Technical question answering (TPO vs EPDM) using RAG knowledge base</li></ul></td>
+<td class="data-cell" data-testid="cell-useCases-1"><ul class="cell-list"><li>AI scoring of opportunities across 15+ factors with win probability calculation</li><li>Team matching based on strengths, availability, and opportunity characteristics</li><li>Historical competitor proposal analysis to identify pricing patterns and weaknesses</li><li>Real-time competitor activity and market condition monitoring</li><li>Pursue/pass recommendations with detailed rationale</li><li>Competitive intelligence synthesis across market signals</li><li>Integration with Salesforce for opportunity enrichment</li></ul></td>
+<td class="data-cell" data-testid="cell-useCases-2"><ul class="cell-list"><li>Automated NR Bid Sheet generation from Edge Estimate data with regional labor rate adjustments</li><li>Specification requirement extraction and gap analysis</li><li>Edge Estimate validation against historical data and Takeoff details</li><li>Vendor quote matching to specification requirements</li><li>Competitor proposal analysis for pricing insights</li><li>Technical question answering for estimators addressing Edge learning curve</li><li>Measurement and quantity validation (roof depth, pipes, curbing, skylights)</li></ul></td>
+<td class="data-cell" data-testid="cell-useCases-3"><ul class="cell-list"><li>AI-optimized schedule creation considering resources, weather, and geofencing requirements</li><li>Real-time actuals vs estimates tracking from Viewpoint ERP with variance alerts</li><li>Automated daily and weekly report generation for customers and field crews</li><li>Pre-Con Packet assembly (Scope of Work with drawings/sketches, Schedule of Work)</li><li>Project Portfolio compilation for customers and internal teams</li><li>RFI response generation using project context and knowledge base</li><li>Project closeout package assembly with completeness validation</li><li>Integration with ADP time tracking and Service Channel geofencing for Walmart compliance</li></ul></td>
+<td class="data-cell" data-testid="cell-useCases-4"><ul class="cell-list"><li>Automated submittal package assembly (Assembly Letter, Manufacturer Warranty, Technical Information, Code Requirements)</li><li>Automatic downloading from manufacturer websites and portals</li><li>Specification section linking to Edge Estimate line items</li><li>Role-based access control enforcement across all platforms</li><li>Data classification and PII protection</li><li>Unified semantic search across all project documentation</li><li>Completeness validation against spec requirements</li><li>Knowledge base for technical specifications and historical data</li></ul></td>
+      </tr>
+    
+
+      <tr class="row-pale">
+        <td class="label-cell">
+          <div class="label-content">
+            <div class="indicator indicator-green"></div>
+            <span>Workloads</span>
+          </div>
+        </td>
+        <td class="data-cell" data-testid="cell-workloads-0"><ul class="cell-list"><li>Private cloud infrastructure with Secure Enclave architecture</li><li>PII masking Trust Layer for SOC 2 compliance</li><li>Local Vector Database for RAG technical knowledge</li><li>Salesforce CRM integration for lead synchronization</li><li>HailTrace, AccuWeather, and Interactive Hail Maps API integration</li><li>ConstructConnect and Dodge Data permit monitoring</li><li>CoStar, Reonomy property data integration</li><li>ZoomInfo, Apollo contact enrichment</li><li>Bombora intent signal monitoring</li><li>LLM reasoning engine for content generation</li></ul></td>
+<td class="data-cell" data-testid="cell-workloads-1"><ul class="cell-list"><li>XGBoost ML model trained on 5 years of win/loss data</li><li>Constraint optimization engine for team matching</li><li>NLP document analysis for competitor proposals</li><li>RAG knowledge base for competitive intelligence</li><li>Web scrapers and news APIs for market monitoring</li><li>Sentiment analysis for competitive positioning</li><li>LLM-powered explanation generation</li><li>Salesforce API integration for opportunity data</li><li>Calendar integration for team availability</li></ul></td>
+<td class="data-cell" data-testid="cell-workloads-2"><ul class="cell-list"><li>NLP and PDF parsing for specification analysis</li><li>RAG with specification database</li><li>Template engine for proposal generation</li><li>LLM for narrative content creation</li><li>Statistical analysis and ML anomaly detection for estimate validation</li><li>NLP matching engine for quote-to-spec comparison</li><li>Historical pricing database with regression analysis</li><li>Edge Estimate API integration</li><li>Regional labor rate database</li></ul></td>
+<td class="data-cell" data-testid="cell-workloads-3"><ul class="cell-list"><li>Constraint optimization engine for scheduling</li><li>Weather API integration for schedule planning</li><li>Viewpoint ERP integration for real-time cost tracking</li><li>ADP and Service Channel integration for geofencing compliance</li><li>Resource database and availability tracking</li><li>Anomaly detection for variance identification</li><li>RAG with project document index for RFI responses</li><li>LLM for report narrative generation</li><li>Microsoft Teams integration for notifications</li><li>Template engine for Pre-Con Packets</li><li>Document management system for Portfolio assembly</li></ul></td>
+<td class="data-cell" data-testid="cell-workloads-4"><ul class="cell-list"><li>Vector database for semantic search with RBAC</li><li>Web automation for manufacturer portal access</li><li>Manufacturer API integration for document retrieval</li><li>PDF assembly and formatting engine</li><li>NLP extraction for requirement matching</li><li>Knowledge graph for spec-to-Edge relationships</li><li>Edge Estimate API integration</li><li>IAM integration for role-based access</li><li>Data classification engine with automated labeling</li><li>Document indexing and retrieval system</li><li>Citation generation for knowledge provenance</li></ul></td>
+      </tr>
+    
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <p>Purpose: Connect customer business priorities to technology solutions that accelerate outcomes</p>
+      <p style="margin-top: 8px;">Generated by BlueAlly Value Map Generator</p>
+    </div>
+  </div>
+</body>
+</html>
